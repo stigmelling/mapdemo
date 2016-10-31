@@ -11,15 +11,12 @@
 <div id="myMap"></div>
 
 <script>
+
     var tileLayer = new ol.layer.Tile({
-        source: new ol.source.TileWMS({
-            url: 'http://opencache.statkart.no/gatekeeper/gk/gk.open?',
-            params: {
-                LAYERS: 'norges_grunnkart',
-                VERSION: '1.1.1'
-            }
-        })
-    })
+        source: new ol.source.BingMaps({ key: 'Ap0tylPiQE52ht1kuR1NfVnPg2Cwmnxsjvhcf97GPP3YMeNwWE_AMnITVJNkbrEs'
+        , imagerySet: 'AerialWithLabels' })
+        , visible:true
+    });
     var map = new ol.Map({
         target: 'myMap',
         layers: [tileLayer],
