@@ -12,7 +12,6 @@
 
 <script>
 
-    var projection = ol.proj.get('EPSG:32632');
     var tileLayer = new ol.layer.Tile({
         source: new ol.source.TileWMS({
             url: 'http://localhost:9999/geoserver/gwc/service/wms',
@@ -29,18 +28,23 @@
         }),
         maxResolution:15
     })
-    var bingLayer = new ol.layer.Tile({
-        source: new ol.source.BingMaps({ key: 'AnZ8aw1FU3WhZuyOTO23cxJc5NUvnwPHhX0eeXdtmPlR3AdIbEi1soS_-aTUhgkX'
-                , imagerySet: 'AerialWithLabels' })
-      , visible:true
-    });
+
+    var mapLayer = new ol.layer.Tile({
+      source: new ol.source.TileWMS({
+        url: 'http://opencache.statkart.no/gatekeeper/gk/gk.open?',
+        params: {
+          LAYERS: 'topo2', //norges_grunnkart
+          VERSION: '1.1.1'
+        }
+      })
+    })
+
 
     var map = new ol.Map({
         target: 'myMap',
-        layers: [bingLayer, tileLayer],
+        layers: [mapLayer, tileLayer],
         view: new ol.View({
             zoom: 15,
-            projection: projection,
 //            center: ol.proj.transform([10.30983233, 60.21529845], 'EPSG:4326', 'EPSG:3857')
             center: ol.proj.transform([10.30983233, 60.21529845], 'EPSG:4326', 'EPSG:3857')
         })
