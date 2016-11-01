@@ -12,25 +12,35 @@
 
 <script>
 
+
     var tileLayer = new ol.layer.Tile({
         source: new ol.source.TileWMS({
-            url: 'http://wms.geonorge.no/skwms1/wms.nib',
+            url: 'http://localhost:9999/geoserver/gwc/service/wms',
             params: {
-                'LAYERS': 'ortofoto', //norges_grunnkart
-                'VERSION': '1.1.1',
-                'TRANSPARENT':false,
-                'FORMAT':'image/jpeg'
-                ,'TILED':true
+                VERSION: '1.1.1',
+//                WIDTH: 256,
+//                HEIGHT: 256,
+//                SRS: 'EPSG:32632',
+                'LAYERS': 'okart:nmultra_600_h21',
+                /** PNG for street maps, JPG for aerials */
+                'FORMAT': 'image/png'
             }
-        })
+            , hidpi:false
+        }),
+        maxResolution:15
     })
+    var bingLayer = new ol.layer.Tile({
+        source: new ol.source.BingMaps({ key: 'AnZ8aw1FU3WhZuyOTO23cxJc5NUvnwPHhX0eeXdtmPlR3AdIbEi1soS_-aTUhgkX'
+                , imagerySet: 'AerialWithLabels' })
+      , visible:true
+    });
 
     var map = new ol.Map({
         target: 'myMap',
-        layers: [tileLayer],
+        layers: [bingLayer, tileLayer],
         view: new ol.View({
             zoom: 13,
-            center: ol.proj.transform([8.68, 61.52], 'EPSG:4326', 'EPSG:3857')
+            center: ol.proj.transform([10.30983233, 60.21529845], 'EPSG:4326', 'EPSG:3857')
         })
     })
     var ol3d = new olcs.OLCesium({map: map});
