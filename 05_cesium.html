@@ -13,10 +13,18 @@
 <script>
 
     var tileLayer = new ol.layer.Tile({
-        source: new ol.source.BingMaps({ key: 'Ap0tylPiQE52ht1kuR1NfVnPg2Cwmnxsjvhcf97GPP3YMeNwWE_AMnITVJNkbrEs'
-        , imagerySet: 'AerialWithLabels' })
-        , visible:true
-    });
+        source: new ol.source.TileWMS({
+            url: 'http://wms.geonorge.no/skwms1/wms.nib',
+            params: {
+                'LAYERS': 'ortofoto', //norges_grunnkart
+                'VERSION': '1.1.1',
+                'TRANSPARENT':false,
+                'FORMAT':'image/jpeg'
+                ,'TILED':true
+            }
+        })
+    })
+
     var map = new ol.Map({
         target: 'myMap',
         layers: [tileLayer],
