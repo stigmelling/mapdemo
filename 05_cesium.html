@@ -12,7 +12,7 @@
 
 <script>
 
-
+    var projection = ol.proj.get('EPSG:32632');
     var tileLayer = new ol.layer.Tile({
         source: new ol.source.TileWMS({
             url: 'http://localhost:9999/geoserver/gwc/service/wms',
@@ -20,7 +20,7 @@
                 VERSION: '1.1.1',
 //                WIDTH: 256,
 //                HEIGHT: 256,
-//                SRS: 'EPSG:32632',
+                'SRS': 'EPSG:32632',
                 'LAYERS': 'okart:nmultra_600_h21',
                 /** PNG for street maps, JPG for aerials */
                 'FORMAT': 'image/png'
@@ -39,7 +39,9 @@
         target: 'myMap',
         layers: [bingLayer, tileLayer],
         view: new ol.View({
-            zoom: 13,
+            zoom: 15,
+            projection: projection,
+//            center: ol.proj.transform([10.30983233, 60.21529845], 'EPSG:4326', 'EPSG:3857')
             center: ol.proj.transform([10.30983233, 60.21529845], 'EPSG:4326', 'EPSG:3857')
         })
     })
