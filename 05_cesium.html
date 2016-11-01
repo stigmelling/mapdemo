@@ -16,7 +16,7 @@
         source: new ol.source.TileWMS({
             url: 'http://wms.geonorge.no/skwms1/wms.nib',
             params: {
-                'LAYERS': 'ortofoto', //norges_grunnkart
+                'LAYERS': 'ortofoto',
                 'VERSION': '1.1.1',
                 'TRANSPARENT':false,
                 'FORMAT':'image/jpeg'
@@ -38,12 +38,9 @@
 
     var scene = ol3d.getCesiumScene();
     var terrainProvider = new Cesium.CesiumTerrainProvider({
-        url : '//assets.agi.com/stk-terrain/world',
-    //        requestVertexNormals: true,
-    });
+        url : '//assets.agi.com/stk-terrain/world'});
     scene.terrainProvider = terrainProvider;
-    //    scene.globe.enableLighting = false;
-
+    
 </script>
 </body>
 </html>
