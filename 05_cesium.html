@@ -12,57 +12,12 @@
 
 <script>
 
-    var tileLayer = new ol.layer.Tile({
-        source: new ol.source.TileWMS({
-            url: 'http://opencache.statkart.no/gatekeeper/gk/gk.open?',
-            params: {
-                LAYERS: 'topo2',
-                VERSION: '1.1.1'
-            }
-        })
-    });
-    var style = {
-        'Point': new ol.style.Style({
-          image: new ol.style.Circle({
-            fill: new ol.style.Fill({
-              color: 'rgba(255,255,0,0.4)'
-            }),
-            radius: 5,
-            stroke: new ol.style.Stroke({
-              color: '#ff0',
-              width: 1
-            })
-          })
-        }),
-        'LineString': new ol.style.Style({
-          stroke: new ol.style.Stroke({
-            color: '#f00',
-            width: 3
-          })
-        }),
-        'MultiLineString': new ol.style.Style({
-          stroke: new ol.style.Stroke({
-            color: '#0f0',
-            width: 3
-          })
-        })
-      };
 
     var tileLayer = new ol.layer.Tile({
             source: new ol.source.BingMaps({ key: 'Ap0tylPiQE52ht1kuR1NfVnPg2Cwmnxsjvhcf97GPP3YMeNwWE_AMnITVJNkbrEs'
             , imagerySet: 'AerialWithLabels' })
             , visible:true
         });
-    var vectorLayer = new ol.layer.Vector({
-        source: new ol.source.Vector({
-            url: 'k1.gpx',
-            format: new ol.format.GPX(),
-            projection: ol.proj.get( 'EPSG:4326')
-        }),
-        style: function(feature) {
-          return style[feature.getGeometry().getType()];
-        }
-    });
     var map = new ol.Map({
         target: 'myMap',
         layers: [tileLayer],
@@ -122,9 +77,6 @@
         roll : 0.0,},
       complete: test
       });
-
-
-
 </script>
 </body>
 </html>
