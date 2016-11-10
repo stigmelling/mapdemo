@@ -3,9 +3,9 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
-    <link rel="stylesheet" href="./node_modules/ol3-cesium/dist/ol.css" type="text/css">
-    <script type="text/javascript" src="./node_modules/ol3-cesium/dist/ol3cesium.js"></script>
-    <script type="text/javascript" src="./node_modules/ol3-cesium/dist/Cesium/Cesium.js"></script>
+    <link rel="stylesheet" href="http://openlayers.org/ol3-cesium/ol.css" type="text/css">
+    <script type="text/javascript" src="http://openlayers.org/ol3-cesium/ol3cesium.js"></script>
+    <script type="text/javascript" src="http://openlayers.org/ol3-cesium/Cesium/Cesium.js"></script>
 </head>
 <body>
 <div id="myMap"></div>
@@ -48,6 +48,11 @@
         })
       };
 
+    var tileLayer = new ol.layer.Tile({
+            source: new ol.source.BingMaps({ key: 'Ap0tylPiQE52ht1kuR1NfVnPg2Cwmnxsjvhcf97GPP3YMeNwWE_AMnITVJNkbrEs'
+            , imagerySet: 'AerialWithLabels' })
+            , visible:true
+        });
     var vectorLayer = new ol.layer.Vector({
         source: new ol.source.Vector({
             url: 'k1.gpx',
@@ -66,6 +71,32 @@
             center: ol.proj.transform([10.329984622076154, 59.67340721748769], 'EPSG:4326', 'EPSG:3857')
         })
     })
+
+    var test = function () {
+      scene.camera.flyTo({
+        destination : Cesium.Cartesian3.fromDegrees(10.37271825,59.55586132, 600.0),
+        duration: 60,
+        orientation : {
+        heading : Cesium.Math.toRadians(170.0),
+        pitch : Cesium.Math.toRadians(-25.0),
+        roll : 0.0},
+        complete: test2,
+        maximumHeight: 500,
+      })
+    };
+
+    var test2 = function () {
+      scene.camera.flyTo({
+        destination : Cesium.Cartesian3.fromDegrees(10.38333694,59.52900291, 1000.0),
+        duration: 5,
+        orientation : {
+        heading : Cesium.Math.toRadians(355),
+        pitch : Cesium.Math.toRadians(-15.0),
+        roll : 0.0},
+        maximumHeight: 1000,
+      })
+    };
+
   var ol3d = new olcs.OLCesium({map: map});
     ol3d.setEnabled(true);
 
@@ -78,10 +109,20 @@
       'kne.kml', {
         camera: scene.camera,
         canvas: scene.canvas,
-        clampToGround: true
-
+        clampToGround: true,
       }
     ));
+
+    scene.camera.flyTo({
+      destination : Cesium.Cartesian3.fromDegrees(10.33542546, 59.68488188, 700.0),
+      duration: 20,
+      orientation : {
+        heading : Cesium.Math.toRadians(180.0),
+        pitch : Cesium.Math.toRadians(-15.0),
+        roll : 0.0,},
+      complete: test
+      });
+
 
 
 </script>
